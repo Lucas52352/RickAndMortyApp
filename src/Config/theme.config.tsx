@@ -32,7 +32,6 @@ const theme = createTheme({
     },
     typography: {
         fontFamily: themePalette.FONT_GLOBAL,
-        fontSize: 25
     },
     components: {
         MuiButton: {
