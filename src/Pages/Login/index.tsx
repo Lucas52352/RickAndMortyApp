@@ -1,5 +1,7 @@
 import { Box, Button, Container, Grid, Paper, TextField, Typography } from "@mui/material";
 import React, { ChangeEvent, FormEvent, useState } from "react";
+import { useNotification } from "../../Context/Notification.context";
+import { LoginValidate } from "../../Utils/validateForm";
 
 export const LoginPage: React.FC<{}> = () => {
 
@@ -8,20 +10,36 @@ export const LoginPage: React.FC<{}> = () => {
         password: string
     }
 
+
+    const { getError, getSuccess } = useNotification()
+    
+
     const [loginData, setLoginData] = useState<LoginType>({
         username: '',
         password: ''
     })
 
     const dataLogin = (event: ChangeEvent<HTMLInputElement>) => {
-        setLoginData({...loginData, [event.target.name]: event.target.value})
-     
+        setLoginData({
+            ...loginData,
+            [event.target.name]: event.target.value
+        })
+
     }
 
     const handleSubmit = (event: FormEvent<HTMLInputElement>) => {
+
         event.preventDefault()
-        console.log(loginData);
-        
+
+        LoginValidate.validate(loginData)
+
+        .then(() => {
+            getSuccess(JSON.stringify(loginData))
+        })
+
+        .catch((error) => {
+            getError(error.message)
+        })        
     }
 
     return (
@@ -50,7 +68,6 @@ export const LoginPage: React.FC<{}> = () => {
                                         fullWidth 
                                         label='Username' 
                                         sx={{mt: 2, mb: 1.5}} 
-                                        required
                                     />
 
                                     <TextField 
@@ -61,7 +78,6 @@ export const LoginPage: React.FC<{}> = () => {
                                         fullWidth 
                                         label='Password' 
                                         sx={{mt: 1.5, mb: 1.5}} 
-                                        required
                                     />
 
                                     <Button 

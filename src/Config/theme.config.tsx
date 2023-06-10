@@ -12,7 +12,11 @@ export enum themePalette {
 
     //! ALERT STYLES
     ERROR_MAIN = '#F44336',
-    BG_ERROR_MAIN = 'rgba(244, 78, 54, 0.3)'
+    BG_ERROR_MAIN = 'rgba(244, 78, 54, 0.3)',
+
+    //* SUCCESS STYLES
+    SUCCESS_MAIN = '#66BB6A',
+    BG_SUCCESS_MAIN = 'rgba(102, 187, 186, 0.3)'
 }
 
 const theme = createTheme({
@@ -54,6 +58,10 @@ const theme = createTheme({
                 standardError: {
                     border: `1px solid ${themePalette.ERROR_MAIN}`,
                     background: themePalette.BG_ERROR_MAIN
+                },
+                standardSuccess:{
+                    border: `1px solid ${themePalette.SUCCESS_MAIN}`,
+                    background: themePalette.BG_SUCCESS_MAIN
                 }
             }
         }
