@@ -3,7 +3,7 @@ import { instance } from "./base.api"
 const endpoint = 'character'
 
 export const characters = {
-    getAll: function({page = 1} : {page?: number}) {
+    getAll: function ({ page = 1 }: { page?: number }) {
         return instance.get(endpoint, {
             params: {
                 page
@@ -11,7 +11,7 @@ export const characters = {
         })
     },
 
-    getById: function({id = 1} : { id: number}) {
+    getById: function ({ id = 1 }: { id: number }) {
         return instance.get(`${endpoint}/${id}`)
     }
 
