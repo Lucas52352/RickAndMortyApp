@@ -1,4 +1,4 @@
-import { Box, Button, Container } from '@mui/material';
+import { Button, Container, Grid } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { CardComponent, Header } from '../../Components';
 import { characters } from '../../api/characters';
@@ -38,16 +38,19 @@ export const HomePage: React.FC<{}> = () => {
         />
 
         {allCharacters?.length !== 0 ? (
-          <Box>
+          <Grid container spacing={2} direction='row'>
             {allCharacters?.map(character => (
-              <CardComponent
-                image={character.image}
-                name={character.name}
-                species={character.species}
-                status={character.status}
-              />
+              <Grid item xs={3} >
+                <CardComponent
+                  key={character.id}
+                  image={character.image}
+                  name={character.name}
+                  species={character.species}
+                  status={character.status}
+                />
+              </Grid>
             ))}
-          </Box>
+          </Grid>
         ) : (
           ''
         )}

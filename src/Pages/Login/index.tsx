@@ -8,17 +8,13 @@ import {
   Typography,
 } from '@mui/material';
 import React, { ChangeEvent, FormEvent, useState } from 'react';
-import { useNotification } from '../../Context/Notification.context';
-import { LoginValidate } from '../../Utils/validateForm';
+
+type LoginType = {
+  username: string;
+  password: string;
+};
 
 export const LoginPage: React.FC<{}> = () => {
-  type LoginType = {
-    username: string;
-    password: string;
-  };
-
-  const { getError, getSuccess } = useNotification();
-
   const [loginData, setLoginData] = useState<LoginType>({
     username: '',
     password: '',
@@ -27,23 +23,14 @@ export const LoginPage: React.FC<{}> = () => {
   const dataLogin = (event: ChangeEvent<HTMLInputElement>) => {
     setLoginData({
       ...loginData,
-      [event.target.name]: event.target.value,
-    });
-  };
+      [event.target.name]: event.target.value
+    })
+  }
 
   const handleSubmit = (event: FormEvent<HTMLInputElement>) => {
     event.preventDefault();
-
-    LoginValidate.validate(loginData)
-
-      .then(() => {
-        getSuccess(JSON.stringify(loginData));
-      })
-
-      .catch(error => {
-        getError(error.message);
-      });
-  };
+    console.log(loginData);
+  }
 
   return (
     <div>
@@ -56,28 +43,29 @@ export const LoginPage: React.FC<{}> = () => {
           sx={{ minHeight: '90vh' }}>
           <Grid item>
             <Paper sx={{ padding: '1.2em', borderRadius: '.5em' }}>
-              <Typography variant="h5" sx={{ mt: 1, mb: 1 }}>
+              <Typography variant="h4" sx={{ mt: 1, mb: 1 }}>
                 Log In
               </Typography>
               <Box component="form" onSubmit={handleSubmit}>
                 <TextField
-                  onChange={dataLogin}
                   name="username"
                   margin="normal"
                   type="text"
                   fullWidth
                   label="Username"
                   sx={{ mt: 2, mb: 1.5 }}
+                  required
+                  onChange={dataLogin}
                 />
 
                 <TextField
-                  onChange={dataLogin}
                   name="password"
                   margin="normal"
                   type="password"
                   fullWidth
                   label="Password"
                   sx={{ mt: 1.5, mb: 1.5 }}
+                  required
                 />
 
                 <Button

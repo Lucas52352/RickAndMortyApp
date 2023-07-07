@@ -18,10 +18,10 @@ type CardProps = {
 
 export const CardComponent: React.FC<CardProps> = ({ image, name, species, status }) => {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card>
       <CardMedia
         component="img"
-        height="194"
+        height="270"
         image={image}
         alt="rick"
       />
