@@ -11,6 +11,7 @@ import React, { ChangeEvent, useEffect, useState } from 'react';
 import { CardComponent, Header } from '../../Components';
 import { characters } from '../../api/characters';
 import { TypeCharacter } from './interface/character.interface';
+import { themePalette } from '../../Config/theme.config';
 
 export const HomePage: React.FC<{}> = () => {
   const [allCharacters, setAllCharacters] = useState<TypeCharacter[] | null>(
@@ -28,7 +29,7 @@ export const HomePage: React.FC<{}> = () => {
 
       .then(response => {
         setCount(response.data.info.pages);
-        
+
         setAllCharacters(response.data.results);
         setTimeout(() => setLoading(false), 500);
       })
@@ -46,10 +47,10 @@ export const HomePage: React.FC<{}> = () => {
     <div>
       <Container sx={{ mt: 6 }} maxWidth="xl">
         <Header
-          title="Hola Mundo"
-          description="Bienvenido a WW"
+          title="Rick & Morty"
+          description="Characters"
           element={
-            <Button fullWidth variant="contained">
+            <Button variant="contained">
               {' '}
               Iniciar{' '}
             </Button>
@@ -84,8 +85,8 @@ export const HomePage: React.FC<{}> = () => {
                 'No Data'
               )}
             </div>
-            <Box sx={{width: '100%', display: 'flex', justifyContent: 'center'}}>
-              <Pagination count={count} page={page} onChange={handleChange} variant='outlined' size='large'/>
+            <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+              <Pagination count={count} page={page} onChange={handleChange} variant='outlined' color="primary" size='large' />
             </Box>
           </>
         )}
