@@ -9,6 +9,7 @@ export enum themePalette {
     BG = '#160c28',
     PR = '#efcb68',
     FONT_GLOBAL = "'Playfair Display', serif",
+    CARD = '#5C5E5D',
 
     //! ALERT STYLES
     ERROR_MAIN = '#F44336',

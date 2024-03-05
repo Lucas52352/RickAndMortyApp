@@ -11,7 +11,7 @@ export const characters = {
         })
     },
 
-    getById: function ({ id = 1 }: { id: number }) {
+    getById: function ({ id = '1' }: { id: string | undefined }) {
         return instance.get(`${endpoint}/${id}`)
     }
 

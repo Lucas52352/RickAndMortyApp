@@ -5,15 +5,13 @@ import {
   Container,
   Grid,
   Pagination,
-  Stack,
 } from '@mui/material';
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { CardComponent, Header } from '../../Components';
 import { characters } from '../../api/characters';
 import { TypeCharacter } from './interface/character.interface';
-import { themePalette } from '../../Config/theme.config';
 
-export const HomePage: React.FC<{}> = () => {
+export const HomePage: React.FC = () => {
   const [allCharacters, setAllCharacters] = useState<TypeCharacter[] | null>(
     null,
   );
