@@ -1,5 +1,6 @@
 import { AppBar, Box, Button, Container, Grid, Stack, Toolbar, Typography } from "@mui/material"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import logo from './Assets/logo.png'
 
 export const NavBar: React.FC<{}> = () => {
 
@@ -17,8 +18,11 @@ export const NavBar: React.FC<{}> = () => {
                             justifyContent='space-between'
                             alignItems='center'
                         >
-                            <Grid item>
-                                <Typography>Rick & Morty</Typography>
+                            <Grid item sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                                <Link to='/'>
+                                    <img src={logo} style={{ width: '6em', margin: '1em' }} />
+                                </Link>
+                                <Typography sx={{ m: 3 }}>Rick & Morty</Typography>
 
                             </Grid>
 

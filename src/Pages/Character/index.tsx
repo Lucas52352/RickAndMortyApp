@@ -16,6 +16,8 @@ export const CharacterPage: React.FC = () => {
     characters.getById({ id })
       .then(response => {
         setCharacter(response.data)
+        console.log(character);
+
         setLoading(false)
       }
       )
@@ -39,11 +41,19 @@ export const CharacterPage: React.FC = () => {
                 <Divider />
                 <Box sx={{ textAlign: "left", m: 5 }}>
                   <Typography variant="h6">Specie: {character!.species}</Typography>
-                  <Typography variant="h6">Type: {character!.type}</Typography>
+                  <Typography variant="h6">Type: {character?.type || "Unknown"}</Typography>
                   <Typography variant="h6">Gender: {character!.gender}</Typography>
-                  <Typography variant="h6">Origin: {character!.origin.name}</Typography>
+                  <Typography variant="h6">Origin: {character!.origin.name.charAt(0).toUpperCase() + character!.origin.name.slice(1)}</Typography>
                   <Typography variant="h6">Location: {character!.location.name}</Typography>
-                  <Chip color="secondary" variant="outlined" label={character!.status}></Chip>
+                  <Box sx={{ textAlign: 'center', m: 5 }}>
+                    {
+                      character?.status === "Alive"
+                        ? <Chip color="success" variant="outlined" label={character!.status.charAt(0).toUpperCase() + character!.status.slice(1)} sx={{ fontSize: '1.2em' }} />
+                        : character?.status === "unknown"
+                          ? <Chip color="secondary" variant="outlined" label={character!.status.charAt(0).toUpperCase() + character!.status.slice(1)} sx={{ fontSize: '1.2em' }} />
+                          : <Chip color="error" variant="outlined" label={character!.status.charAt(0).toUpperCase() + character!.status.slice(1)} sx={{ fontSize: '1.2em' }} />
+                    }
+                  </Box>
                 </Box>
               </Grid>
               <Grid item xs={6}>

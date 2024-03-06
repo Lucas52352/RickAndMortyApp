@@ -37,7 +37,7 @@ export const HomePage: React.FC = () => {
       });
   }, [page]);
 
-  const handleChange = (event: ChangeEvent<unknown>, value: number) => {
+  const handleChange = (_event: ChangeEvent<unknown>, value: number) => {
     setPage(value);
   };
 
@@ -54,6 +54,9 @@ export const HomePage: React.FC = () => {
             </Button>
           }
         />
+        <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+          <Pagination sx={{ m: 4 }} count={count} page={page} onChange={handleChange} variant='outlined' color="primary" size='large' />
+        </Box>
         {loading ? (
           <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
             <CircularProgress />
@@ -71,6 +74,7 @@ export const HomePage: React.FC = () => {
                     <Grid item xs={3}>
                       <CardComponent
                         key={character.id}
+                        id={character.id}
                         image={character.image}
                         name={character.name}
                         species={character.species}

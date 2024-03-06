@@ -8,33 +8,38 @@ import {
   Divider,
   Typography,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 type CardProps = {
+  id: number,
   image: string,
   name: string,
   species: string,
   status: string,
 }
 
-export const CardComponent: React.FC<CardProps> = ({ image, name, species, status }) => {
+export const CardComponent: React.FC<CardProps> = ({ id, image, name, species, status }) => {
+
+  let navigate = useNavigate();
+
   return (
     <Card>
       <CardMedia
         component="img"
-        height="270"
+        height="230"
         image={image}
-        alt="rick"
+        alt={name}
       />
 
       <CardContent>
-        <Typography variant="h4" sx={{mb: .5}}>{name}</Typography>
-          <Divider />
-          <Typography sx={{mt: .5}}>Specie: {species}</Typography>
-          <Typography sx={{mt: .5}}>Status: {status}</Typography>
+        <Typography variant="h6" sx={{ mb: .5 }}>{name}</Typography>
+        <Divider />
+        <Typography sx={{ mt: .5 }}>Specie: {species}</Typography>
+        <Typography sx={{ mt: .5 }}>Status: {status}</Typography>
       </CardContent>
 
       <CardActions>
-        <Button variant="contained" size="small" fullWidth>
+        <Button variant="contained" size="small" fullWidth onClick={() => navigate(`character/${id}`)}>
           {" "}
           Learn More...{" "}
         </Button>
