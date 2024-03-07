@@ -71,9 +71,8 @@ export const HomePage: React.FC = () => {
                   direction="row"
                   sx={{ mt: 5, mb: 5 }}>
                   {allCharacters?.map(character => (
-                    <Grid item xs={3}>
+                    <Grid item xs={3} key={character.id}>
                       <CardComponent
-                        key={character.id}
                         id={character.id}
                         image={character.image}
                         name={character.name}

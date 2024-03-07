@@ -1,0 +1,1 @@
+export { FavsSlice } from './favsSlice'
