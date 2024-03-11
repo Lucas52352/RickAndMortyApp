@@ -16,22 +16,22 @@ export const FavsComponent: React.FC<FavsComponentProps> = ({
   const items = useAppSelector((state) => state.FavsReducer)
 
   return (
-    <Drawer anchor={'right'} open={open}>
-      <Box sx={{width: '25em', p: 2}}>
+    <Drawer SlideProps={{ style: { width: '30%' } }} anchor={'right'} open={open}>
+      <Box sx={{ width: '100%', p: 2 }}>
         <Stack
           direction='row'
-          justifyContent='center'
+          justifyContent='space-between'
           alignItems='center'
         >
-          <Typography variant='h4' sx={{mb: 1.4}}>Favorites</Typography>
-          <Divider sx={{my: 1.5}}/>
-            <IconButton color='primary' onClick={handleStateViewDrawer}>
-              <CloseRounded />
-            </IconButton>
+          <Typography variant='h4' sx={{ mb: 1.4 }}>Favorites</Typography>
+          <Divider sx={{ my: 1.5 }} />
+          <IconButton color='primary' onClick={handleStateViewDrawer}>
+            <CloseRounded />
+          </IconButton>
         </Stack>
-        <Divider sx={{my: 1.5}} />
+        <Divider sx={{ my: 1.5 }} />
         {
-          items.length > 0 
+          items.length > 0
             ? items.map(({ id, image, name, info }) => (
               <HorizontalCardComponent
                 key={id}
@@ -41,7 +41,7 @@ export const FavsComponent: React.FC<FavsComponentProps> = ({
                 info={info}
               />
             ))
-            : 'Nothing over here...'
+            : 'Nothing over here, click 🤍 to add favorites'
         }
       </Box>
     </Drawer>

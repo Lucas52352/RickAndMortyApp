@@ -1,5 +1,5 @@
 
-import React, { FC } from "react"
+import { FC } from "react"
 import { useAppDispatch } from "../../redux/hooks"
 import { removeFromFavs } from "../../redux/slices/favsSlice"
 import { Card, CardActions, CardContent, CardMedia, Divider, Grid, IconButton, Typography } from "@mui/material"

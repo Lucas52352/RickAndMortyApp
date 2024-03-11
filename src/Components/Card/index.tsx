@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import { Favorite } from "@mui/icons-material";
 import { addToFavs } from "../../redux/slices/favsSlice";
+import { setItem } from "../../Utils/localStorage";
 
 
 type CardProps = {
@@ -33,6 +34,7 @@ export const CardComponent: React.FC<CardProps> = ({ id, image, name, species, s
 
   useEffect(() => {
     setDisabledButton(itemExists.some(item => item.id === id))
+    setItem('favs', itemExists)
   }, [itemExists, id])
 
   const handleAddToFavs = () => {

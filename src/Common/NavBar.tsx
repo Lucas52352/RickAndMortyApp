@@ -36,6 +36,8 @@ export const NavBar: React.FC<{}> = () => {
                             
                             <Grid item>
                                 <Stack spacing={5} direction='row'>
+                                    <Button variant="contained" onClick={() => navigate('/login')}> Login </Button>
+                                    <Button variant="outlined"> Register </Button>
                                     <IconButton
                                         color="primary"
                                         onClick={handleStateViewDrawer}
@@ -44,8 +46,6 @@ export const NavBar: React.FC<{}> = () => {
                                             <Favorite />
                                         </Badge>
                                     </IconButton>
-                                    <Button variant="contained" onClick={() => navigate('/login')}> Login </Button>
-                                    <Button variant="outlined"> Register </Button>
                                 </Stack>
                             </Grid>
                         </Grid>
