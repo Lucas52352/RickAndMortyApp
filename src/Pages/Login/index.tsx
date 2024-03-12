@@ -7,7 +7,10 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+import React from 'react';
+import { useFormik } from 'formik'
+import { LoginValidate } from '../../Utils/validateForm';
+import { useNotification } from '../../Context/Notification.context';
 
 type LoginType = {
   username: string;
@@ -15,22 +18,19 @@ type LoginType = {
 };
 
 export const LoginPage: React.FC<{}> = () => {
-  const [loginData, setLoginData] = useState<LoginType>({
-    username: '',
-    password: '',
-  });
 
-  const dataLogin = (event: ChangeEvent<HTMLInputElement>) => {
-    setLoginData({
-      ...loginData,
-      [event.target.name]: event.target.value
-    })
-  }
+  const { getSuccess } = useNotification()
 
-  const handleSubmit = (event: FormEvent<HTMLInputElement>) => {
-    event.preventDefault();
-    console.log(loginData);
-  }
+  const formik = useFormik<LoginType>({
+    initialValues: {
+      username: '',
+      password: ''
+    },
+    validationSchema: LoginValidate,
+    onSubmit: (values: LoginType) => {
+      getSuccess(JSON.stringify(values))
+    }
+  })
 
   return (
     <div>
@@ -46,7 +46,7 @@ export const LoginPage: React.FC<{}> = () => {
               <Typography variant="h4" sx={{ mt: 1, mb: 1 }}>
                 Log In
               </Typography>
-              <Box component="form" onSubmit={handleSubmit}>
+              <Box component="form" onSubmit={formik.handleSubmit}>
                 <TextField
                   name="username"
                   margin="normal"
@@ -54,8 +54,10 @@ export const LoginPage: React.FC<{}> = () => {
                   fullWidth
                   label="Username"
                   sx={{ mt: 2, mb: 1.5 }}
-                  required
-                  onChange={dataLogin}
+                  value={formik.values.username}
+                  onChange={formik.handleChange}
+                  error={formik.touched.username && Boolean(formik.errors.username)}
+                  helperText={formik.touched.username && formik.errors.username}
                 />
 
                 <TextField
@@ -65,14 +67,19 @@ export const LoginPage: React.FC<{}> = () => {
                   fullWidth
                   label="Password"
                   sx={{ mt: 1.5, mb: 1.5 }}
-                  required
+                  value={formik.values.password}
+                  onChange={formik.handleChange}
+                  error={formik.touched.password && Boolean(formik.errors.password)}
+                  helperText={formik.touched.password && formik.errors.password}
                 />
 
                 <Button
                   fullWidth
                   type="submit"
                   variant="contained"
-                  sx={{ mt: 1.5, mb: 3 }}>
+                  sx={{ mt: 1.5, mb: 3 }}
+                  
+                >
                   Log In
                 </Button>
               </Box>
