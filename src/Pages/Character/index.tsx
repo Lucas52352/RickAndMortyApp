@@ -5,7 +5,7 @@ import { ICharacter } from "./interface/character.interface"
 import { Box, Chip, CircularProgress, Container, Divider, Grid, Typography } from "@mui/material";
 import { themePalette } from "../../Config/theme.config";
 
-export const CharacterPage: React.FC = () => {
+const CharacterPage: React.FC = () => {
 
   const { id } = useParams()
 
@@ -66,3 +66,5 @@ export const CharacterPage: React.FC = () => {
     </Box>
   )
 }
+
+export default CharacterPage;
