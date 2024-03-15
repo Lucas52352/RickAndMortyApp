@@ -1,9 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { FavsSlice } from './slices'
+import { FavsSlice, authSlice } from './slices'
 
 export const store = configureStore({
   reducer: {
-    FavsReducer: FavsSlice.reducer
+    FavsReducer: FavsSlice.reducer,
+    AuthReducer: authSlice.reducer
   }
 })
 

@@ -85,10 +85,10 @@ export const HomePage: React.FC = () => {
               ) : (
                 'No Data'
               )}
+              <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                <Pagination count={count} page={page} onChange={handleChange} variant='outlined' color="primary" size='large' />
+              </Box>
             </div>
-            <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-              <Pagination count={count} page={page} onChange={handleChange} variant='outlined' color="primary" size='large' />
-            </Box>
           </>
         )}
       </Container>
