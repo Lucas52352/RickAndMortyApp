@@ -11,6 +11,10 @@ import React from 'react';
 import { useFormik } from 'formik'
 import { LoginValidate } from '../../Utils/validateForm';
 import { useNotification } from '../../Context/Notification.context';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { logIn } from '../../redux/slices/authSlice';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { store } from '../../redux/store';
 
 type LoginType = {
   username: string;
@@ -20,6 +24,9 @@ type LoginType = {
 const LoginPage: React.FC<{}> = () => {
 
   const { getSuccess } = useNotification()
+  const { isAuth } = useAppSelector(store => store.AuthReducer)
+  const navigate = useNavigate()
+  const dispatch = useAppDispatch()
 
   const formik = useFormik<LoginType>({
     initialValues: {
@@ -28,11 +35,13 @@ const LoginPage: React.FC<{}> = () => {
     },
     validationSchema: LoginValidate,
     onSubmit: (values: LoginType) => {
+      dispatch(logIn())
+      navigate('/')
       getSuccess(JSON.stringify(values))
     }
   })
 
-  return (
+  return isAuth ? <Navigate to='/' replace /> : (
     <div>
       <Container maxWidth="sm">
         <Grid
@@ -78,7 +87,7 @@ const LoginPage: React.FC<{}> = () => {
                   type="submit"
                   variant="contained"
                   sx={{ mt: 1.5, mb: 3 }}
-                  
+
                 >
                   Log In
                 </Button>
@@ -88,7 +97,8 @@ const LoginPage: React.FC<{}> = () => {
         </Grid>
       </Container>
     </div>
-  );
+  )
+
 };
 
 export default LoginPage
